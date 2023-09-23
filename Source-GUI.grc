@@ -37,7 +37,11 @@ blocks:
   id: variable
   parameters:
     comment: ''
+<<<<<<< HEAD
     value: '64000'
+=======
+    value: '32000'
+>>>>>>> 6aefaed064e05ef2950c3e5baf4bd0259f89b6c1
   states:
     bus_sink: false
     bus_source: false
