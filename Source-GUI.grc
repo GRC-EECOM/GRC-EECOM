@@ -33,6 +33,30 @@ options:
     state: enabled
 
 blocks:
+- name: Max_Phase
+  id: variable
+  parameters:
+    comment: ''
+    value: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 200.0]
+    rotation: 0
+    state: enabled
+- name: Min_Phase
+  id: variable
+  parameters:
+    comment: ''
+    value: '100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 272.0]
+    rotation: 0
+    state: enabled
 - name: samp_rate
   id: variable
   parameters:
@@ -42,7 +66,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 244.0]
+    coordinate: [16, 120.0]
     rotation: 0
     state: enabled
 - name: uiselect
@@ -105,6 +129,24 @@ blocks:
     coordinate: [48, 692.0]
     rotation: 0
     state: true
+- name: analog_pll_carriertracking_cc_0
+  id: analog_pll_carriertracking_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    max_freq: ''
+    maxoutbuf: '0'
+    min_freq: ''
+    minoutbuf: '0'
+    w: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 224.0]
+    rotation: 0
+    state: true
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -125,65 +167,48 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 372.0]
+    coordinate: [240, 200.0]
     rotation: 0
     state: true
-- name: audio_source_0
-  id: audio_source
+- name: analog_sig_source_x_1
+  id: analog_sig_source_x
   parameters:
     affinity: ''
     alias: ''
+    amp: '1'
     comment: ''
-    device_name: ''
+    freq: '1000'
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_outputs: '1'
-    ok_to_block: 'True'
+    offset: '0'
+    phase: '0'
     samp_rate: samp_rate
+    showports: 'False'
+    type: complex
+    waveform: analog.GR_COS_WAVE
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 184.0]
+    coordinate: [632, 328.0]
     rotation: 0
     state: true
-- name: blocks_float_to_complex_0
-  id: blocks_float_to_complex
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [928, 188.0]
-    rotation: 0
-    state: true
-- name: blocks_selector_0
-  id: blocks_selector
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    enabled: 'True'
-    input_index: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
     num_inputs: '2'
-    num_outputs: '1'
-    output_index: '0'
-    showports: 'True'
     type: complex
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1272, 376.0]
+    coordinate: [864, 248.0]
     rotation: 0
     state: true
 - name: blocks_throttle2_0
@@ -204,7 +229,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 420.0]
+    coordinate: [488, 232.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -288,13 +313,94 @@ blocks:
     coordinate: [1624, 400.0]
     rotation: 0
     state: true
+- name: qtgui_freq_sink_x_1
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '1024'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    norm_window: 'False'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1064, 240.0]
+    rotation: 0
+    state: true
 
 connections:
+- [analog_pll_carriertracking_cc_0, '0', blocks_multiply_xx_0, '0']
 - [analog_sig_source_x_0, '0', blocks_throttle2_0, '0']
-- [audio_source_0, '0', blocks_float_to_complex_0, '0']
-- [blocks_float_to_complex_0, '0', blocks_selector_0, '0']
-- [blocks_selector_0, '0', qtgui_freq_sink_x_0, '0']
-- [blocks_throttle2_0, '0', blocks_selector_0, '1']
+- [analog_sig_source_x_1, '0', blocks_multiply_xx_0, '1']
+- [blocks_multiply_xx_0, '0', qtgui_freq_sink_x_1, '0']
+- [blocks_throttle2_0, '0', analog_pll_carriertracking_cc_0, '0']
 
 metadata:
   file_format: 1
