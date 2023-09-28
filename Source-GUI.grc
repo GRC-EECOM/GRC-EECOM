@@ -33,16 +33,28 @@ options:
     state: enabled
 
 blocks:
-- name: Max_Phase
+- name: Distance_m
   id: variable
   parameters:
     comment: ''
-    value: '1000'
+    value: '384400000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 200.0]
+    coordinate: [352, 8.0]
+    rotation: 0
+    state: enabled
+- name: Freq_RF
+  id: variable
+  parameters:
+    comment: ''
+    value: 6e9
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 8.0]
     rotation: 0
     state: enabled
 - name: Min_Phase
@@ -55,6 +67,18 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [16, 272.0]
+    rotation: 0
+    state: enabled
+- name: Path_Loss
+  id: variable
+  parameters:
+    comment: ''
+    value: 20*math.log10(Distance_m) + 20*math.log10(Freq_RF) - 147.55
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 200.0]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -96,7 +120,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 408.0]
+    coordinate: [16, 432.0]
     rotation: 0
     state: true
 - name: variable_qtgui_chooser_0
@@ -129,22 +153,23 @@ blocks:
     coordinate: [48, 692.0]
     rotation: 0
     state: true
-- name: analog_pll_carriertracking_cc_0
-  id: analog_pll_carriertracking_cc
+- name: analog_noise_source_x_0
+  id: analog_noise_source_x
   parameters:
     affinity: ''
     alias: ''
+    amp: '1'
     comment: ''
-    max_freq: ''
     maxoutbuf: '0'
-    min_freq: ''
     minoutbuf: '0'
-    w: ''
+    noise_type: analog.GR_GAUSSIAN
+    seed: '0'
+    type: complex
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 224.0]
+    coordinate: [192, 328.0]
     rotation: 0
     state: true
 - name: analog_sig_source_x_0
@@ -154,7 +179,7 @@ blocks:
     alias: ''
     amp: '1'
     comment: ''
-    freq: '1000'
+    freq: Freq_RF
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
@@ -167,34 +192,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 200.0]
+    coordinate: [192, 192.0]
     rotation: 0
     state: true
-- name: analog_sig_source_x_1
-  id: analog_sig_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: '1'
-    comment: ''
-    freq: '1000'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '0'
-    phase: '0'
-    samp_rate: samp_rate
-    showports: 'False'
-    type: complex
-    waveform: analog.GR_COS_WAVE
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [632, 328.0]
-    rotation: 0
-    state: true
-- name: blocks_multiply_xx_0
-  id: blocks_multiply_xx
+- name: blocks_add_xx_0
+  id: blocks_add_xx
   parameters:
     affinity: ''
     alias: ''
@@ -208,7 +210,45 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [864, 248.0]
+    coordinate: [544, 240.0]
+    rotation: 0
+    state: true
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    showports: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1160, 248.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 248.0]
     rotation: 0
     state: true
 - name: blocks_throttle2_0
@@ -229,7 +269,61 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 232.0]
+    coordinate: [392, 224.0]
+    rotation: 0
+    state: true
+- name: blocks_throttle2_1
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 336.0]
+    rotation: 0
+    state: true
+- name: channels_fading_model_0
+  id: channels_fading_model
+  parameters:
+    K: '4.0'
+    LOS: 'False'
+    N: '8'
+    affinity: ''
+    alias: ''
+    comment: ''
+    fDTs: 10.0/samp_rate
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    seed: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 224.0]
+    rotation: 0
+    state: true
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [168, 8.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -391,16 +485,19 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1064, 240.0]
+    coordinate: [1288, 232.0]
     rotation: 0
     state: true
 
 connections:
-- [analog_pll_carriertracking_cc_0, '0', blocks_multiply_xx_0, '0']
+- [analog_noise_source_x_0, '0', blocks_throttle2_1, '0']
 - [analog_sig_source_x_0, '0', blocks_throttle2_0, '0']
-- [analog_sig_source_x_1, '0', blocks_multiply_xx_0, '1']
-- [blocks_multiply_xx_0, '0', qtgui_freq_sink_x_1, '0']
-- [blocks_throttle2_0, '0', analog_pll_carriertracking_cc_0, '0']
+- [blocks_add_xx_0, '0', channels_fading_model_0, '0']
+- [blocks_delay_0, '0', qtgui_freq_sink_x_1, '0']
+- [blocks_multiply_const_vxx_0, '0', blocks_delay_0, '0']
+- [blocks_throttle2_0, '0', blocks_add_xx_0, '0']
+- [blocks_throttle2_1, '0', blocks_add_xx_0, '1']
+- [channels_fading_model_0, '0', blocks_multiply_const_vxx_0, '0']
 
 metadata:
   file_format: 1
