@@ -11,6 +11,7 @@ from gnuradio import blocks
 from gnuradio import filter
 from gnuradio import gr
 from gnuradio.filter import firdes
+from gnuradio.fft import window
 
 
 class oqpsk_receiver(gr.hier_block2):
