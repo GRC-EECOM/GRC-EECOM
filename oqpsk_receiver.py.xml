@@ -1,0 +1,60 @@
+<block>
+  <name>Oqpsk Receiver</name>
+  <key>oqpsk_receiver</key>
+  <category>[GRC Hier Blocks]</category>
+  <import>from oqpsk_receiver import oqpsk_receiver  # grc-generated hier_block</import>
+  <make>oqpsk_receiver(
+    a=$a,
+    fc=$fc,
+    num_taps=$num_taps,
+    samp_rate=$samp_rate,
+    sym_rate=$sym_rate,
+)</make>
+  <callback>set_a($a)</callback>
+  <callback>set_fc($fc)</callback>
+  <callback>set_num_taps($num_taps)</callback>
+  <callback>set_samp_rate($samp_rate)</callback>
+  <callback>set_sym_rate($sym_rate)</callback>
+  <param>
+    <name>a</name>
+    <key>a</key>
+    <value>0.35</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>fc</name>
+    <key>fc</key>
+    <value>1000</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>num_taps</name>
+    <key>num_taps</key>
+    <value>11</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>samp_rate</name>
+    <key>samp_rate</key>
+    <value>32000</value>
+    <type>raw</type>
+  </param>
+  <param>
+    <name>sym_rate</name>
+    <key>sym_rate</key>
+    <value>160</value>
+    <type>raw</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </source>
+  <doc>/home/electra/.grc_gnuradio/oqpsk_receiver.py</doc>
+  <grc_source>/home/electra/gnuradio/OQPSK/oqpsk_receiver.grc</grc_source>
+</block>
