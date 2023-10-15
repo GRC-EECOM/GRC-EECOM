@@ -39,7 +39,7 @@ class oqpsk_receiver(gr.hier_block2):
         	1, samp_rate, sym_rate, a, num_taps))
         self.root_raised_cosine_filter_0_1_0 = filter.fir_filter_fff(1, firdes.root_raised_cosine(
         	1, samp_rate, sym_rate, a, num_taps))
-        self.hilbert_fc_0 = filter.hilbert_fc(65, firdes.WIN_HAMMING, 6.76)
+        self.hilbert_fc_0 = filter.hilbert_fc(65, window.WIN_HAMMING, 6.76)
         self.blocks_multiply_xx_1_0 = blocks.multiply_vcc(1)
         self.blocks_multiply_xx_1 = blocks.multiply_vcc(1)
         self.blocks_multiply_const_xx_0 = blocks.multiply_const_ff(-1)
