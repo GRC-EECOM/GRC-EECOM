@@ -131,7 +131,7 @@ class oqpsk_transmitter_test(gr.top_block, Qt.QWidget):
             num_taps=11,
             samp_rate=32000,
         )
-        self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_ic((1+1j,1-1j,-1+1j,-1-1j), 1)
+        self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_ic([1+1j,1-1j,-1+1j,-1-1j], 1)
         self.analog_random_source_x_0 = blocks.vector_source_i(map(int, numpy.random.randint(0, 2, 1000)), True)
 
         ##################################################
